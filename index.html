@@ -14,7 +14,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="/">
+  <base href="/Profile/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -114,16 +114,19 @@
   </div>
 
   <script>
-    // Remove splash once Flutter is ready
-    window.addEventListener('flutter-first-frame', function () {
+    function removeSplash() {
       var splash = document.getElementById('loading-splash');
       if (splash) {
         splash.classList.add('fade-out');
-        setTimeout(function () {
-          splash.remove();
-        }, 500);
+        setTimeout(function () { splash.remove(); }, 500);
       }
-    });
+    }
+
+    // Fallback: remove splash after 10 seconds no matter what
+    setTimeout(removeSplash, 10000);
+
+    // Remove splash when Flutter's first frame renders
+    window.addEventListener('flutter-first-frame', removeSplash);
   </script>
 
   <script src="flutter_bootstrap.js" async></script>
